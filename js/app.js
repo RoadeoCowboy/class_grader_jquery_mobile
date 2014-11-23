@@ -1,10 +1,17 @@
 (function($) {
  "use strict";
  
- var gApoint = 90.0;
+ var gApoint = 50.0;
  var gBpoint = 80.0;
  var gCpoint = 70.0;
  var gDpoint = 60.0;
+ 
+var gHomeworksMaxpoint = 10.0;              
+var gLabsMaxpoint = 10.0;
+var gProjectMaxpoint = 20.0;
+var gPresentationMaxpoint = 20.0;
+var gMidtermMaxpoint = 20.0;
+var gFinalMaxpoint = 20.0;
  
  var computeGrade = function()
  {
@@ -62,10 +69,42 @@
         localStorage.setItem('gradeB', bPoint);
         localStorage.setItem('gradec', cPoint);
         localStorage.setItem('gradeD', dPoint);
+       
         gApoint = aPoint;
         gBpoint = bPoint;
         gCpoint = cPoint;
         gDpoint = dPoint;
+        window.history.back();
+    } catch (ex)
+    {
+        alert('Points must be a decimal value');
+    }
+ };
+ 
+ var saveMaxSettings = function()
+ {
+    try {
+        var HomeworksMaxPoint = Number( $('#HomeworksMax').val() );
+        var LabsMaxPoint = Number( $('#LabsMax').val() );
+        var ProjectMaxPoint = Number( $('#ProjectMax').val() );
+        var PresentationMaxPoint = Number( $('#PresentationMax').val() );
+        var MidtermMaxPoint = Number( $('#MidtermMax').val() );
+        var FinalMaxPoint = Number( $('#FinalMax').val() );
+ 
+        localStorage.setItem('homeworksMax', HomeworksMaxPoint);
+        localStorage.setItem('labsMax', LabsMaxPoint);
+        localStorage.setItem('projectMax', ProjectMaxPoint);
+        localStorage.setItem('presentationMax', PresentationMaxPoint);
+        localStorage.setItem('midtermMax', MidtermMaxPoint);
+        localStorage.setItem('finalMax', FinalMaxPoint);
+        
+       gHomeworksMaxpoint = HomeworksMaxPoint;              
+       gLabsMaxpoint = LabsMaxPoint;
+       gProjectMaxpoint = ProjectMaxPoint;
+       gPresentationMaxpoint = PresentationMaxPoint;
+       gMidtermMaxpoint = MidtermMaxPoint;
+       gFinalMaxpoint = FinalMaxPoint;
+        
         window.history.back();
     } catch (ex)
     {
@@ -85,12 +124,23 @@
                   $('#computeGrade').on('click', computeGrade);
                   $('#saveSettings').on('click', saveSettings);
                   $('#cancelSettings').on('click', cancelSettings);
-
+                  $('#saveMaxSettings').on('click', saveMaxSettings);
+                     
+                  //Get Stored cuttoff values
                   var gradeCutOffSettingA = localStorage.getItem('gradeA');
                   var gradeCutOffSettingB = localStorage.getItem('gradeB');
                   var gradeCutOffSettingC = localStorage.getItem('gradeB');
                   var gradeCutOffSettingD = localStorage.getItem('gradeD');
                   
+                  //Get Stored max point values
+                  var gradeMaxSetting1 = localStorage.getItem('homeworksMax');
+                  var gradeMaxSetting2 = localStorage.getItem('labsMax');
+                  var gradeMaxSetting3 = localStorage.getItem('projectMax');
+                  var gradeMaxSetting4 = localStorage.getItem('presentationMax');
+                  var gradeMaxSetting5 = localStorage.getItem('midtermMax');
+                  var gradeMaxSetting6 = localStorage.getItem('finalMax');
+                  
+                  //Sets stored cutoff percentage
                   if (gradeCutOffSettingA)
                   {
                      gApoint = Number(gradeCutOffSettingA);
@@ -108,10 +158,52 @@
                      gDpoint = Number(gradeCutOffSettingD);
                   }
                   
-                     Number($('#gradeA').val(gApoint));
-                     Number($('#gradeB').val(gBpoint));
-                     Number($('#gradeC').val(gCpoint));
-                     Number($('#gradeD').val(gDpoint));
+                  //Sets stored max point for each category
+                  if (gradeMaxSetting1)
+                  {
+                     gHomeworksMaxpoint = Number(gradeMaxSetting1);
+                  }
+                  if (gradeMaxSetting2)
+                  {
+                     gLabsMaxpoint = Number(gradeMaxSetting2);
+                  }
+                  if (gradeMaxSetting3)
+                  {
+                     gProjectMaxpoint = Number(gradeMaxSetting3);
+                  }
+                  if (gradeMaxSetting4)
+                  {
+                     gPresentationMaxpoint = Number(gradeMaxSetting4);
+                  }
+                  
+                   if (gradeMaxSetting5)
+                  {
+                     gMidtermMaxpoint = Number(gradeMaxSetting5);
+                  }
+                  if (gradeMaxSetting6)
+                  {
+                     gFinalMaxpoint = Number(gradeMaxSetting6);
+                  }
+                  
+                  //Sets value of setting to value
+                     $('#gradeA').val(gApoint);
+                     $('#gradeB').val(gBpoint);
+                     $('#gradeC').val(gCpoint);
+                     $('#gradeD').val(gDpoint);
+                  
+                  $('#Homeworks').attr('max', gradeMaxSetting1) ;
+                  $('#Labs').attr('max', gradeMaxSetting2);
+                  $('#Project').attr('max', gradeMaxSetting3);
+                  $('#Presentation').attr('max', gradeMaxSetting4);
+                  $('#Midterm').attr('max', gradeMaxSetting5);
+                  $('#Final').attr('max', gradeMaxSetting6);
+                  
+                  $("#Homeworks").slider("refresh");
+                  $("#Labs").slider("refresh");
+                  $("#Project").slider("refresh");
+                  $("#Presentation").slider("refresh");
+                  $("#Midterm").slider("refresh");
+                  $("#Final").slider("refresh");
                   
                   });
 
