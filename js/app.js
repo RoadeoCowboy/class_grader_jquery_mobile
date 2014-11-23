@@ -1,7 +1,7 @@
 (function($) {
  "use strict";
  
- var gApoint = 50.0;
+ var gApoint = 90.0;
  var gBpoint = 80.0;
  var gCpoint = 70.0;
  var gDpoint = 60.0;
@@ -52,9 +52,9 @@ var gFinalMaxpoint = 20.0;
         currentGrade = "F";
     }
     $('#finalGrade').text(currentGrade);
-    $('#totalPoints').text(totalPoints.toString());
-    $('#maxPoints').text(maxPoints.toString());
-    $('#finalPercentage').text(currentPercentage.toString());
+    $('#totalPoints').text(totalPoints);
+    $('#maxPoints').text(maxPoints);
+    $('#finalPercentage').text(currentPercentage);
  };
  
  var saveSettings = function()
@@ -67,7 +67,7 @@ var gFinalMaxpoint = 20.0;
  
         localStorage.setItem('gradeA', aPoint);
         localStorage.setItem('gradeB', bPoint);
-        localStorage.setItem('gradec', cPoint);
+        localStorage.setItem('gradeC', cPoint);
         localStorage.setItem('gradeD', dPoint);
        
         gApoint = aPoint;
@@ -104,6 +104,19 @@ var gFinalMaxpoint = 20.0;
        gPresentationMaxpoint = PresentationMaxPoint;
        gMidtermMaxpoint = MidtermMaxPoint;
        gFinalMaxpoint = FinalMaxPoint;
+       
+        $('#Homeworks').attr('max', gHomeworksMaxpoint) ;
+                  $('#Homeworks').slider("refresh");
+                  $('#Labs').attr('max', gLabsMaxpoint);
+                  $('#Labs').slider("refresh");
+                  $('#Project').attr('max', gProjectMaxpoint);
+                  $("#Project").slider("refresh");
+                  $('#Presentation').attr('max', gPresentationMaxpoint);
+                  $('#Presentation').slider("refresh");
+                  $('#Midterm').attr('max', gMidtermMaxpoint);
+                  $("#Midterm").slider("refresh");
+                  $('#Final').attr('max', gFinalMaxpoint);
+                  $("#Final").slider("refresh");
         
         window.history.back();
     } catch (ex)
@@ -129,7 +142,7 @@ var gFinalMaxpoint = 20.0;
                   //Get Stored cuttoff values
                   var gradeCutOffSettingA = localStorage.getItem('gradeA');
                   var gradeCutOffSettingB = localStorage.getItem('gradeB');
-                  var gradeCutOffSettingC = localStorage.getItem('gradeB');
+                  var gradeCutOffSettingC = localStorage.getItem('gradeC');
                   var gradeCutOffSettingD = localStorage.getItem('gradeD');
                   
                   //Get Stored max point values
@@ -139,6 +152,7 @@ var gFinalMaxpoint = 20.0;
                   var gradeMaxSetting4 = localStorage.getItem('presentationMax');
                   var gradeMaxSetting5 = localStorage.getItem('midtermMax');
                   var gradeMaxSetting6 = localStorage.getItem('finalMax');
+                  
                   
                   //Sets stored cutoff percentage
                   if (gradeCutOffSettingA)
@@ -184,27 +198,26 @@ var gFinalMaxpoint = 20.0;
                   {
                      gFinalMaxpoint = Number(gradeMaxSetting6);
                   }
-                  
+               
                   //Sets value of setting to value
-                     $('#gradeA').val(gApoint);
-                     $('#gradeB').val(gBpoint);
-                     $('#gradeC').val(gCpoint);
-                     $('#gradeD').val(gDpoint);
-                  
+                     Number($('#gradeA').val(gApoint));
+                     Number($('#gradeB').val(gBpoint));
+                     Number($('#gradeC').val(gCpoint));
+                     Number($('#gradeD').val(gDpoint));
+                 /*
                   $('#Homeworks').attr('max', gradeMaxSetting1) ;
+                  $('#Homeworks').slider("refresh");
                   $('#Labs').attr('max', gradeMaxSetting2);
+                  $('#Labs').slider("refresh");
                   $('#Project').attr('max', gradeMaxSetting3);
-                  $('#Presentation').attr('max', gradeMaxSetting4);
-                  $('#Midterm').attr('max', gradeMaxSetting5);
-                  $('#Final').attr('max', gradeMaxSetting6);
-                  
-                  $("#Homeworks").slider("refresh");
-                  $("#Labs").slider("refresh");
                   $("#Project").slider("refresh");
-                  $("#Presentation").slider("refresh");
+                  $('#Presentation').attr('max', gradeMaxSetting4);
+                  $('#Presentation').slider("refresh");
+                  $('#Midterm').attr('max', gradeMaxSetting5);
                   $("#Midterm").slider("refresh");
+                  $('#Final').attr('max', gradeMaxSetting6);
                   $("#Final").slider("refresh");
-                  
+                  */
                   });
 
  // Load plugin
