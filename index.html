@@ -3,7 +3,7 @@
     <head>
 	<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1">
 	    <meta charset="utf-8">
-		<title>Grade Calculator</title>
+		<title>Richard the Grader</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
@@ -20,24 +20,32 @@
     
     
     <body>
-    
-
-
-	
+	<div data-role="page" id="loginPage">
+        <div data-role="header">
+            <h1>Login</h1>
+        </div>
+         <div role="main" class="ui-content">
+            <center>
+            <script type="IN/Login"> 
+                Welcome, <?js= firstName ?><?js= lastName ?>
+                
+               <div role="main" class="ui-content">
+                <a href="#mainPage" class="ui-btn ui-corner-all ui-btn-inline">Start Application</a>
+                </div>
+            </script>
+            </center>
+         </div>
+        </div>
+ 
         <div data-role="page" class="" id="mainPage">
 	    <div data-role="header" class="">
-		<h1>Grade Factory</h1>
+		<h1>Richard<br>
+                <center>the Grader</center>
+                </h1>
 		<a href="#settingsPage" id='settingsButton' class="ui-btn-right" data-role="button" data-icon="gear">Settings</a>
+                <a href="#" id='logoutButton' class="ui-btn-left" data-role="button">Logout</a>
 	    </div>
 	    <div data-role="content" class="">
-                
-    <script type="IN/Login"> 
-        Welcome, <?js= firstName ?><?js= lastName ?> 
-    </script>
-    </br>
-    <a href="#" onClick='IN.User.logout(function() {
-
-});'>Logout</a><br/>
                  
 		<form>
 		    
@@ -103,9 +111,9 @@
 	    <div data-role="tabs" id="tabs">
 		<div data-role="navbar">
 		    <ul>
-			<li><a href="#MaxPoint" class="ui-btn-active">Set Maximum Points</a></li>
-			<li><a href="#ScalingFactors">Set Scaling Factors (%)</a></li>
-			<li><a href="#GradeCuttOff">Set Grade Cutoff (%)</a></li>
+			<li><a href="#MaxPoint" class="ui-btn-active">Maximum<br>Points</a></li>
+			<li><a href="#ScalingFactors">Scaling<br>Factors(%)</a></li>
+			<li><a href="#GradeCuttOff">Grade<br>Cutoff(%)</a></li>
 		    </ul>
 		</div>
 		<div id="MaxPoint">
