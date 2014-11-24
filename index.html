@@ -9,16 +9,36 @@
 		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 		<script src="js/app.js"></script>
 		<script src="cordova.js"></script>
+                 <script src="//platform.linkedin.com/in.js" type="text/javascript">
+                api_key: 75ke4cse0jf63n
+                authorize: true
+                </script>
+                 
+                 <link rel="stylesheet" href="css/DavidTheme.css" />
+                 <link rel="stylesheet" href="css/DavidTheme.min.css" />
 		</head>
     
     
     <body>
-	<div data-role="page" class="" id="mainPage">
+    
+
+
+	
+        <div data-role="page" class="" id="mainPage">
 	    <div data-role="header" class="">
 		<h1>Grade Factory</h1>
 		<a href="#settingsPage" id='settingsButton' class="ui-btn-right" data-role="button" data-icon="gear">Settings</a>
 	    </div>
 	    <div data-role="content" class="">
+                
+    <script type="IN/Login"> 
+        Welcome, <?js= firstName ?><?js= lastName ?> 
+    </script>
+    </br>
+    <a href="#" onClick='IN.User.logout(function() {
+
+});'>Logout</a><br/>
+                 
 		<form>
 		    
 		    <div data-role="fieldcontain">
