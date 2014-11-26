@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Untitled Document</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+//<link href="css/jquery.circliful.css" rel="stylesheet" type="text/css"/>
+//<script src="js/jquery.circliful.min.js"></script>
+
+<style>
+
+body {
+	margin:0;
+	padding:0;
+}
+
+header {
+	background-color:#20477b;
+	padding:5px;
+	text-decoration:none;
+	position:fixed;
+	width:100%;
+	z-index:1;
+	-webkit-box-shadow:0px 3px 7px 0px raba(0,0,0,0.4);
+	box-shadow:0px 3px 7px 0px raba(0,0,0,0.4);
+}
+
+
+#page, #page1, #page2, #page3 {
+	background: url(image/BGrepeact.jpg) repeat;
+}
+#page .mainmenu {
+
+}
+#page .mainmenu li {
+	background:none;
+	border:none;
+}
+#page  .mainmenu li a {
+	color:#fff;
+	background:#20477b;
+	margin-bottom:1px;
+}
+#page  .mainmenu li a:hover {
+	background:#fff006;
+}
+
+#page1 .mainmenu {
+
+}
+#page1 .mainmenu li {
+	background:none;
+	border:none;
+}
+#page1  .mainmenu li a {
+	color:#fff;
+	background:#20477b;
+	margin-bottom:1px;
+}
+#page1  .mainmenu li a:hover {
+	background:#fff006;
+}
+
+#page2 .mainmenu {
+
+}
+#page2 .mainmenu li {
+	background:none;
+	border:none;
+}
+#page2  .mainmenu li a {
+	color:#fff;
+	background:#20477b;
+	margin-bottom:1px;
+}
+#page2  .mainmenu li a:hover {
+	background:#fff006;
+}
+
+#page3 .mainmenu {
+
+}
+#page3 .mainmenu li {
+	background:none;
+	border:none;
+}
+#page3  .mainmenu li a {
+	color:#fff;
+	background:#20477b;
+	margin-bottom:1px;
+}
+#page3  .mainmenu li a:hover {
+	background:#fff006;
+}
+
+#page .footerBG, #page1 .footerBG, #page2 .footerBG, #page3 .footerBG {
+	width:100%;
+	height:40px;
+	background:#20477b;
+	text-align:center;
+	border:0;
+}
+
+.garage {
+	left:220px;
+	width:299px;
+	height: 369px;
+	background: url(image/garage2.jpg) no-repeat;
+}
+
+
+</style>
+</head> 
+<body> 
+<div data-role="page" id="page">
+	<div data-role="header">
+    <header><center><font color="#fff006">West Garage</font></center></header>
+	</div>
+	<div data-role="content">
+
+<center><div id="myStat" data-dimension="260" data-text="" data-info="" data-width="10" data-fontsize="68" data-percent="0" data-fgcolor="#fff10d" data-bgcolor="#20477b" data-fill="#20477b"></div></center>
+<script>
+//var count = 0;
+var total_occupied = 0;
+var percent_occupied = 0;
+
+var ajax_call = function() {
+    
+
+$(function(){
+   
+ //Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
+    $.ajax({                                      
+        url: 'viewdata.php',
+        data: "",
+        dataType: 'json',
+        success: function(rows){
+          
+          for (var i in rows) {
+            var row = rows[i];
+            
+            var floorid = row[0];
+            var spotid = row[1];
+            var occupancy = row[2];
+            
+            if (row[2] == "1") {
+              total_occupied += 1;
+            }
+            
+            $('#output').append("<b>Floor: </b>"+floorid+"<b> Spot: </b>"+spotid+"<b> Occupancy: </b>"+occupancy)
+                        .append("<hr />");
+                  
+          }
+            percent_occupied = (total_occupied/3)*100;
+            $('#total_occupied').append("<b>Total space occupied: </b>"+total_occupied);
+            $('#percent_occupied').append("<b>Total space occupied: </b>"+percent_occupied.toFixed(0)+"%");
+            $('#myStat').empty().removeData().attr('data-text', percent_occupied.toFixed(0)+"%").attr('data-percent', percent_occupied.toFixed(0)).circliful()
+            total_occupied = 0;
+ 
+        } 
+    }); 
+  });
+   
+ 
+           
+           
+
+
+/* //old code with counting   
+$('#myStat').empty().removeData().attr('data-text', count.toString()+"%").attr('data-percent', count.toString()).circliful()
+    if (count < 100){
+    count ++;
+    }else {
+        count = 0;
+    }
+*/
+    }
+    
+var interval = 3000; 
+
+setInterval(ajax_call, interval);
+
+</script>
+ 
+<center><font color="#fff"><h2>ALL LEVEL</font></center></h2>
+		<ul data-role="listview" class="mainmenu">
+			<li><a href="#page1">Level One</a></li>
+            <li><a href="#page2">Level Two</a></li>
+			<li><a href="#page3">Level Three</a></li>
+		</ul>		
+	</div>
+
+	<center><div data-role="footer" class="footerBG"><center><div data-role="controlgroup"><a href="#page" data-role="button">Home</a><a href="#" data-role="button">About</a><a href="#" data-role="button">Setting</a></div></center>
+	</div>
+</div>
+
+<div data-role="page" id="page1">
+	<div data-role="header">
+		    <header><center><font color="#fff006">West Garage</font></center></header>
+	</div>
+	<div data-role="content">
+     <center><div class="garage"></div></center>
+    <center><font color="#fff"><h2>Level One</font></center></h2>	
+		<ul data-role="listview" class="mainmenu">
+            <li><a href="#page2">Level Two</a></li>
+			<li><a href="#page3">Level Three</a></li>
+		</ul>			
+	</div>
+    <center><div data-role="footer" class="footerBG">
+      <center><div data-role="controlgroup"><a href="#page" data-role="button">Home</a><a href="#" data-role="button">About</a><a href="#" data-role="button">Setting</a></div></center>
+	</div>
+</div>
+<div data-role="page" id="page2">
+	<div data-role="header">
+		    <header><center><font color="#fff006">West Garage</font></center></header>
+	</div>
+	<div data-role="content">
+    <center><div class="garage"></div></center>
+    <center><font color="#fff"><h2>Level Two</font></center></h2>	
+		<ul data-role="listview" class="mainmenu">
+			<li><a href="#page1">Level One</a></li>
+			<li><a href="#page3">Level Three</a></li>
+		</ul>			
+	</div>
+	<center><div data-role="footer" class="footerBG"><center><div data-role="controlgroup"><a href="#page" data-role="button">Home</a><a href="#" data-role="button">About</a><a href="#" data-role="button">Setting</a></div></center>
+	</div>
+</div>
+<div data-role="page" id="page3">
+	<div data-role="header">
+		    <header><center><font color="#fff006">West Garage</font></center></header>
+	</div>
+	<div data-role="content">
+    <center><div class="garage"></div></center>
+    <center><font color="#fff"><h2>Level Three</font></center></h2>	
+		<ul data-role="listview" class="mainmenu">
+			<li><a href="#page1">Level One</a></li>
+			<li><a href="#page2">Level Three</a></li>
+		</ul>			
+	</div>
+	<center><div data-role="footer" class="footerBG"><center><div data-role="controlgroup"><a href="#page" data-role="button">Home</a><a href="#" data-role="button">About</a><a href="#" data-role="button">Setting</a></div></center>
+	</div>
+</div>
+
+<script>
+
+$( document ).ready(function() {            
+       
+		$('#myStat').circliful();
+		
+		
+		
+  });
+
+
+
+
+</script>
+</body>
+</html>
