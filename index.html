@@ -29,7 +29,16 @@
             <script type="IN/Login"> 
                 Welcome, <?js= firstName ?><?js= lastName ?>
                 
-               <div role="main" class="ui-content">
+               <div class="ui-content">
+                <br><br><br><br><br><br>
+                This Application is Developed by <b>Team Rapid Mobile</b> <br><br>
+                
+                Members:<br>
+                xxx<br>
+                xxx<br>
+                xxx<br>
+                xxx<br>
+                <br><br>
                 <a href="#mainPage" class="ui-btn ui-corner-all ui-btn-inline">Start Application</a>
                 </div>
             </script>
@@ -111,9 +120,9 @@
 	    <div data-role="tabs" id="tabs">
 		<div data-role="navbar">
 		    <ul>
-			<li><a href="#MaxPoint" class="ui-btn-active">Maximum<br>Points</a></li>
-			<li><a href="#ScalingFactors">Scaling<br>Factors(%)</a></li>
-			<li><a href="#GradeCuttOff">Grade<br>Cutoff(%)</a></li>
+			<li><a href="#MaxPoint" >Maximum<br>Points</a></li>
+			<li><a href="#ScalingFactors" >Scaling<br>Factors(%)</a></li>
+			<li><a href="#GradeCuttOff" ">Grade<br>Cutoff(%)</a></li>
 		    </ul>
 		</div>
 		<div id="MaxPoint">
@@ -147,43 +156,48 @@
 			<label for="FinalMax">Final</label>
 			<input type="range" name="FinalMax" id="FinalMax" value="20" min="0" max="900" />
 			    </div>
-			    <a href="#" id='saveMaxSettings' data-role="button" data-inline="true" data-icon="check">Save</a>
+			    <a href="#" id='saveMaxSettings' data-role="button" data-inline="true" data-icon="check">Save max point setting</a>
 			    </p>
 		    </form>
 		   
 		</div>
 		<div id="ScalingFactors">
 		    <form>
+                        <div data-role="fieldcontain">
+			<label for="TotalMaxPoints">Total max points</label>
+			<input type="range" name="TotalMaxPoints" id="TotalMaxPoints" value="100" min="0" max="500" />
+			    </div>
+                        
 			<div data-role="fieldcontain">
-			<label for="HomeworksPercent">Homeworks</label>
+			<label for="HomeworksPercent">Homeworks %</label>
 			<input type="range" name="HomeworksPercent" id="HomeworksPercent" value="10" min="0" max="100" />
 			    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="LabsPercent">Labs</label>
+			<label for="LabsPercent">Labs %</label>
 			<input type="range" name="LabsPercent" id="LabsPercent" value="10" min="0" max="100"  />
 			    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="ProjectPercent">Project</label>
+			<label for="ProjectPercent">Project %</label>
 			<input type="range" name="ProjectPercent" id="ProjectPercent" value="20" min="0" max="100" />
 			    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="PresentationPercent">Presentation</label>
+			<label for="PresentationPercent">Presentation %</label>
 			<input type="range" name="PresentationPercent" id="PresentationPercent" value="20" min="0" max="100" />
 			    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="MidtermPercent">Midterm</label>
+			<label for="MidtermPercent">Midterm %</label>
 			<input type="range" name="MidtermPercent" id="MidtermPercent" value="20" min="0" max="100" />
 			    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="FinalPercent">Final</label>
+			<label for="FinalPercent">Final %</label>
 			<input type="range" name="FinalPercent" id="FinalPercent" value="20" min="0" max="100" />
 			    </div>
-			    <a href="#" id='savePercentSettings' data-role="button" data-inline="true" data-icon="check">Save</a>
+			    <a href="#" id='savePercentSettings' data-role="button" data-inline="true" data-icon="check">Save % Scale Setting</a>
 			    </p>
 		    </form>
 		
@@ -212,7 +226,7 @@
 			    </div>
 		    
 		    
-			    <a href="#" id='saveSettings' data-role="button" data-inline="true" data-icon="check">Save</a>
+			    <a href="#" id='saveSettings' data-role="button" data-inline="true" data-icon="check">Save grade cutoff setting</a>
 			    </p>
 		    </form>
 		
