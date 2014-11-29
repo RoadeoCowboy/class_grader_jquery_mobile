@@ -120,12 +120,12 @@ var gFinalPercentScale = 20.0;
        gFinalMaxpoint = FinalMaxPoint;
        
        gTotalMaxPoints = totalMaxPoint;
-       gHomeworksPercentScale = parseFloat((gHomeworksMaxpoint/totalMaxPoint)*100).toFixed(1);              
-       gLabsPercentScale = parseFloat((gLabsMaxpoint/totalMaxPoint)*100).toFixed(1);
-       gProjectPercentScale = parseFloat((gProjectMaxpoint/totalMaxPoint)*100).toFixed(1);
-       gPresentationPercentScale = parseFloat((gPresentationMaxpoint/totalMaxPoint)*100).toFixed(1);
-       gMidtermPercentScale = parseFloat((gMidtermMaxpoint/totalMaxPoint)*100).toFixed(1);
-       gFinalPercentScale = parseFloat((gFinalMaxpoint/totalMaxPoint)*100).toFixed(1);
+       gHomeworksPercentScale = parseFloat((gHomeworksMaxpoint/totalMaxPoint)*100);              
+       gLabsPercentScale = parseFloat((gLabsMaxpoint/totalMaxPoint)*100);
+       gProjectPercentScale = parseFloat((gProjectMaxpoint/totalMaxPoint)*100);
+       gPresentationPercentScale = parseFloat((gPresentationMaxpoint/totalMaxPoint)*100);
+       gMidtermPercentScale = parseFloat((gMidtermMaxpoint/totalMaxPoint)*100);
+       gFinalPercentScale = parseFloat((gFinalMaxpoint/totalMaxPoint)*100);
 
         localStorage.setItem('totalMaxPoints', gTotalMaxPoints);
         localStorage.setItem('homeworksPercent', gHomeworksPercentScale);
@@ -147,14 +147,6 @@ var gFinalPercentScale = 20.0;
       $("#Midterm").slider("refresh");
       $('#Final').attr('max', gFinalMaxpoint);
       $("#Final").slider("refresh");
-      
-       $('#TotalMaxPoints').slider("refresh");
-      $('#HomeworksPercent').slider("refresh");
-       $('#LabsPercent').slider("refresh");
-       $('#ProjectPercent').slider("refresh");
-       $('#PresentationPercent').slider("refresh");
-       $('#MidtermPercent').slider("refresh");
-       $('#FinalPercent').slider("refresh");
       
      
       $.mobile.pageContainer.pagecontainer('change', "#mainPage", {
@@ -178,40 +170,40 @@ var gFinalPercentScale = 20.0;
         var FinalPercent = Number( $('#FinalPercent').val() );
         var TotalPercent = HomeworksPercent+LabsPercent+ProjectPercent+PresentationPercent+MidtermPercent+FinalPercent;
         
+        
        if (TotalPercent != 100){
          alert('They must add up to 100%');
        }else {
        
-       gTotalMaxPoints = TotalMaxPoints; 
-       gHomeworksPercentScale = HomeworksPercent;              
-       gLabsPercentScale = LabsPercent;
-       gProjectPercentScale = ProjectPercent;
-       gPresentationPercentScale = PresentationPercent;
-       gMidtermPercentScale = MidtermPercent;
-       gFinalPercentScale = FinalPercent;
+       localStorage.setItem('totalMaxPoints', TotalMaxPoints);
+        localStorage.setItem('homeworksPercent', HomeworksPercent);
+        localStorage.setItem('labsPercent', LabsPercent);
+        localStorage.setItem('projectPercent', ProjectPercent);
+        localStorage.setItem('presentationPercent', PresentationPercent);
+        localStorage.setItem('midtermPercent', MidtermPercent);
+        localStorage.setItem('finalPercent', FinalPercent);
+        
+       gTotalMaxPoints = ParseFloat(TotalMaxPoints); 
+       gHomeworksPercentScale = ParseFloat(HomeworksPercent);              
+       gLabsPercentScale = ParseFloat(LabsPercent);
+       gProjectPercentScale = ParseFloat(ProjectPercent);
+       gPresentationPercentScale = ParseFloat(PresentationPercent);
+       gMidtermPercentScale = ParsefloaF(MidtermPercent);
+       gFinalPercentScale = ParseFloat(FinalPercent);
        
-       gHomeworksMaxpoint = HomeworksPercent * TotalMaxPoints /100;              
-       gLabsMaxpoint = LabsPercent * TotalMaxPoints / 100;
-       gProjectMaxpoint = ProjectPercent * TotalMaxPoints / 100;
-       gPresentationMaxpoint = PresentationPercent * TotalMaxPoints / 100;
-       gMidtermMaxpoint = MidtermPercent * TotalMaxPoints /100;
-       gFinalMaxpoint = FinalPercent * TotalMaxPoints /100;
+       gHomeworksMaxpoint = ParseFloat(HomeworksPercent * TotalMaxPoints /100);              
+       gLabsMaxpoint = ParseFloat(LabsPercent * TotalMaxPoints / 100);
+       gProjectMaxpoint = ParseFloat(ProjectPercent * TotalMaxPoints / 100);
+       gPresentationMaxpoint = ParseFloat(PresentationPercent * TotalMaxPoints / 100);
+       gMidtermMaxpoint = ParseFloat(MidtermPercent * TotalMaxPoints /100);
+       gFinalMaxpoint = ParseFloat(FinalPercent * TotalMaxPoints /100);
         
-        localStorage.setItem('totalMaxPoints', gTotalMaxPoints);
-        localStorage.setItem('homeworksPercent', gHomeworksPercentScale);
-        localStorage.setItem('labsPercent', gLabsPercentScale);
-        localStorage.setItem('projectPercent', gProjectPercentScale);
-        localStorage.setItem('presentationPercent', gPresentationPercentScale);
-        localStorage.setItem('midtermPercent', gMidtermPercentScale);
-        localStorage.setItem('finalPercent', gFinalPercentScale);
-        
-        
-       $('#HomeworksMax').slider("refresh");
-       $('#LabsMax').slider("refresh");
-       $('#ProjectMax').slider("refresh");
-       $('#PresentationMax').slider("refresh");
-       $('#MidtermMax').slider("refresh");
-       $('#FinalMax').slider("refresh");
+        localStorage.setItem('homeworksMax', gHomeworksMaxPoint);
+        localStorage.setItem('labsMax', gLabsMaxPoint);
+        localStorage.setItem('projectMax', gProjectMaxPoint);
+        localStorage.setItem('presentationMax', gPresentationMaxPoint);
+        localStorage.setItem('midtermMax', gMidtermMaxPoint);
+        localStorage.setItem('finalMax', gFinalMaxPoint);
        
       $('#Homeworks').attr('max', gHomeworksMaxpoint) ;
       $('#Homeworks').slider("refresh");
@@ -225,13 +217,6 @@ var gFinalPercentScale = 20.0;
       $("#Midterm").slider("refresh");
       $('#Final').attr('max', gFinalMaxpoint);
       $("#Final").slider("refresh");
-      
-      $('#HomeworksPercent').slider("refresh");
-       $('#LabsPercent').slider("refresh");
-       $('#ProjectPercent').slider("refresh");
-       $('#PresentationPercent').slider("refresh");
-       $('#MidtermPercent').slider("refresh");
-       $('#FinalPercent').slider("refresh");
        
        
       $.mobile.pageContainer.pagecontainer('change', "#mainPage", {
@@ -275,7 +260,7 @@ var gFinalPercentScale = 20.0;
                   $('#cancelSettings').on('click', cancelSettings);
                   $('#saveMaxSettings').on('click', saveMaxSettings);
                   $('#savePercentSettings').on('click', savePercentSettings);
-                  $('#settingsPage').on('click', settingsPageSettings);
+                  //$('#settingsPage').on('click', settingsPageSettings);
                   $('#logoutButton').on('click', logout);
                   
                   //Start of grade cuttoff setting sliders event function                 
