@@ -4,29 +4,76 @@
 	<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1">
 	    <meta charset="utf-8">
 		<title>Richard the Grader</title>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-		<link href="css/david.css" rel="stylesheet" type="text/css" />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="js/app.js"></script>
 		<script src="cordova.js"></script>
+		<script>
+        //     $.getJSON("http://khaniankit.com/fetch.php", function(data) {
+        //     $('#studentName').text(data[0].Name);
+        //     $('#courseDescription').text(data[0].CourseDescription);
+        // });
+			$(function(){
+				var items="";
+			  $.getJSON("http://khaniankit.com/fetch.php",function(data){
+
+			    $.each(data,function(index,item) 
+			    {
+			      items+="<option value='"+item.Name+"'>"+item.Name+"</option>";
+			    });
+			    $("#filtertext").html(items); 
+			    $('#courseDescription').text(data[0].CourseDescription);
+			  });
+			});
+        </script>
+
          <script src="//platform.linkedin.com/in.js" type="text/javascript">
-        api_key: 75ke4cse0jf63n
-        authorize: true
+	        api_key: 75ke4cse0jf63n
+	        authorize: true
         </script>
          
-         <link rel="stylesheet" href="css/DavidTheme.css" />
-         <link rel="stylesheet" href="css/DavidTheme.min.css" />
-		</head>
-    
-    
+         <!-- <link rel="stylesheet" href="css/DavidTheme.css" />
+         <link rel="stylesheet" href="css/DavidTheme.min.css" /> -->
+         <link rel="stylesheet" href="css/Custom.css" />
+
+         <!-- jQuery Knob Dependencies -->
+
+         <style type="text/css">
+			body {
+			    background: url(http://fc08.deviantart.net/fs70/i/2011/174/b/c/candy_blur_abstract_hd_by_ivereor-d3jsglw.png);
+			    background-repeat:no-repeat;
+			    background-position:center center;
+			    background-attachment:scroll;
+			    background-size:cover cover;
+			}
+			.ui-page {
+			    background: transparent;
+			}
+			.ui-content{
+			    background: transparent;
+			}
+		</style>
+	</head>
     <body>
 	<div data-role="page" id="loginPage">
-        <div data-role="header">
-            <h1>Login</h1>
+        <div data-role="header" data-theme="b">
+            <h1>Smiley Graders</h1>
         </div>
          <div role="main" class="ui-content">
-            <center>
+    		<div class="ui-body ui-body-a ui-corner-all">
+	        	<form>
+				     <label for="username">Username: </label>
+				     <input type="text" data-clear-btn="true" name="username" id="username" value="" >
+					 <label for="password">Password: </label>
+            		 <input type="password" data-clear-btn="true" name="password" id="password" 					value="" autocomplete="off">
+			</div>
+					
+                    <button type="submit" id="login" class="ui-shadow ui-btn ui-corner-all" 
+						data-theme="b">Login</button>
+				</form>
+            
             <script type="IN/Login"> 
                 Welcome, <?js= firstName ?><?js= lastName ?>
                 
@@ -43,199 +90,310 @@
                 <a href="#mainPage" class="ui-btn ui-corner-all ui-btn-inline">Start Application</a>
                 </div>
             </script>
-            </center>
-         </div>
-        </div>
+            
+          
+         </div>	<!-- End Main -->
+    </div>	<!-- End Login Page -->
  
-        <div data-role="page" class="" id="mainPage">
-	    <div data-role="header" class="">
-		<h1>Richard<br>
-                <center>the Grader</center>
-                </h1>
-		<a href="#settingsPage" id='settingsButton' class="ui-btn-right" data-role="button" data-icon="gear">Settings</a>
-                <a href="#" id='logoutButton' class="ui-btn-left" data-role="button">Logout</a>
-	    </div>
-	    <div data-role="content" class="">
-                 
-		<form>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Homeworks">Homeworks</label>
-			<input type="range" name="Homeworks" id="Homeworks" value="10" min="0" max="10" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Labs">Labs</label>
-			<input type="range" name="Labs" id="Labs" value="10" min="0" max="10"  />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Project">Project</label>
-			<input type="range" name="Project" id="Project" value="20" min="0" max="20" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Presentation">Presentation</label>
-			<input type="range" name="Presentation" id="Presentation" value="20" min="0" max="20" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Midterm">Midterm</label>
-			<input type="range" name="Midterm" id="Midterm" value="20" min="0" max="20" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="Final">Final</label>
-			<input type="range" name="Final" id="Final" value="20" min="0" max="20" />
-			    </div>
-		    
-		    <p style="text-align: center;">
-		    <a href="#" id="computeGrade" data-role="button" data-icon="check">Compute Grade</a>
-		    </p>
-		    
-                    <p>
+        <div data-role="page" class="" id="mainPage" data-theme="c">
+	    	<div data-role="header" class="" data-theme="b">
+				<h1>Richard<br>
+	            	<center>the Grader</center>
+	            </h1>
+			<a href="#settingsPage" id='settingsButton' class="ui-btn-right" data-role="button" data-icon="gear" data-theme="a" data-transition="flip">Settings</a>
+	        <a href="#loginPage" id='logoutButton' class="ui-btn-left" data-theme="a" data-role="button">Logout</a>
+	    	</div>	<!-- /End Header -->
+	    
+		    <div data-role="content" class="" >  
+		    	<form>
+				   <!--  <div class="ui-field-contain"> -->
+				       <!--  <label for="filtertext">Select:</label> -->
+				        <select id="filtertext" data-native-menu="false" class="filterable-select" data-theme="b">
+				            <option value="student-name">Student Name</option>
+				        </select>
+				   <!--  </div> -->
+				</form>
+				<div class="ui-body ui-body-a ui-corner-all">
+				    <p>
+					    <label>Course Description:</label>
+					    <span id="courseDescription">            
+					    </span>
+			    	</p>
+		    	</div>
+		    	<div data-role="panel" id="gradeComputePanel" data-display="overlay" data-position="right" data-theme="a" >
+			    	 <form>
+				    	<ul data-role="listview" data-inset="true" >  
+				    		<li>
+							    <div data-role="fieldcontain" >
+								<label for="Homeworks">Homeworks</label>
+								<input type="range" name="Homeworks" id="Homeworks" value="10" min="0" max="10" data-highlight="true" data-track-theme="c" />
+								    </div>
+						    </li>
+						    <li>
+							    <div data-role="fieldcontain">
+								<label for="Labs">Labs</label>
+								<input type="range" name="Labs" id="Labs" value="10" min="0" max="10" data-highlight="true" data-track-theme="c" />
+								    </div>
+						    </li>
+						    <li>
+							    <div data-role="fieldcontain">
+								<label for="Project">Project</label>
+								<input type="range" name="Project" id="Project" value="20" min="0" max="20" data-highlight="true" data-track-theme="c"/>
+								    </div>
+						    </li>
+						    <li>
+							    <div data-role="fieldcontain">
+								<label for="Presentation">Presentation</label>
+								<input type="range" name="Presentation" id="Presentation" value="20" min="0" max="20" data-highlight="true" data-track-theme="c"/>
+								    </div>
+						    </li>
+						    <li>
+							    <div data-role="fieldcontain">
+								<label for="Midterm">Midterm</label>
+								<input type="range" name="Midterm" id="Midterm" value="20" min="0" max="20" data-highlight="true" data-track-theme="c"/>
+								    </div>
+						    </li>
+						    <li>
+							    <div data-role="fieldcontain">
+								<label for="Final">Final</label>
+								<input type="range" name="Final" id="Final" value="20" min="0" max="20" data-highlight="true" data-track-theme="c"/>
+							    </div>
+						    </li>
+					    </ul>
+						    <p style="text-align: center;">
+						    <a href="#computeGrade" id="computeGrade" data-role="button" data-transition="pop" data-icon="check">Compute Grade</a>
+						    </p>
+					</form> <!-- End Form -->
+					<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
+				</div>	<!-- End Panel -->
+		    </div>	<!-- End Content -->
+		</div>	<!-- End Page -->
+
+	<div data-role="dialog" id="computeGrade" class="" data-overlay-theme="a" data-theme="a">
+		<div data-role="header" class="" data-theme="b">
+			<a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back" data-theme="a" data-transition="pop" >Cancel</a>
+			 <h1>Grade Summary</h1>
+		 </div>	<!-- End Header -->
+		 <div class="ui-body ui-body-a" >
+	        <p>
 		    <label>Final Percentage</label>
-		    <span id="finalPercentage">TBD</span>
+		    <span id="finalPercentage">WHERE AM I</span>
 		    </p>
 		    <p >
 		    <label>Final Grade</label>
 		    <span id="finalGrade">TBD</span>
 		    </p>
-                    <p>
+            <p>
 		    <label>Total Points</label>
 		    <span id="totalPoints">TBD</span>
 		    </p>
-                    <p>
+            <p>
 		    <label>Max Points</label>
 		    <span id="maxPoints">TBD</span>
-		    </p>
-		    
-		</form>
+	    	</p>
+	    	<p>
+	    	<img id="smiley" src="about:blank">
+	    	</p>
+		</div>	<!-- End Content -->
+    </div>	<!-- End Dialog -->
+
+	<div data-role="page" class="" id="settingsPage" data-add-back-btn="true" data-theme="a">
+	    <div data-role="header" class="" data-theme="b">
+		    <a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back" data-transition="flip" data-theme="a">Back</a>
+		    <h1>Grade - Settings</h1>
 	    </div>
-	</div>
-	<div data-role="page" class="" id="settingsPage" data-add-back-btn="true" >
-	    <div data-role="header" class="">
-		<a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back">Cancel</a>
-		<h1>Grade - Settings</h1>
+	    <div data-role="content" >
+	  <!--   <div id="background"> -->
+			<div class="content-primary" >	
+				<ul data-role="listview" data-inset="true" class="ui-alt-icon" >
+					<li><a href="#MaxPoint" data-transition="slidefade">
+						<img src="http://review.punchtab.com/static/zzzzzz/img/badges-framebox1-icons_01.png" class="imgmargin"/>
+						<h3>Maximum Points</h3>
+						<!-- <p>Broken Bells</p> -->
+					</a></li>
+					<li><a href="#DefaultScalingFactors" data-transition="slidefade">
+						<img src="http://www.wpclipart.com/holiday/election_Day/scales/scales_4.png" class="imgmargin"/>
+						<h3>Scaling Factors (%)</h3>
+						<!-- <p>Hot Chip</p> -->
+					</a></li>
+					<li><a href="#GradeCutoff" data-transition="slidefade">
+						<img src="http://cdn.dickblick.com/items/571/34/57134-1012-3ww-l.jpg" class="imgmargin"/>
+						<h3>Grade Cutoff (%)</h3>
+						<!-- <p>Phoenix</p> -->
+					</a></li>
+				</ul>
+			</div><!--/content-primary -->
+		</div><!-- /content -->
+    </div>
+
+    <div data-role="page" class="" id="MaxPoint" data-add-back-btn="true" data-theme="a">
+	    <div data-role="header" class="" data-theme="b">
+		    <a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back" data-transition="flip" data-theme="a">Cancel</a>
+		    <h1>Max Points - Settings</h1>
 	    </div>
-	    <div data-role="tabs" id="tabs">
-		<div data-role="navbar">
-		    <ul>
-			<li><a href="#MaxPoint" >Maximum<br>Points</a></li>
-			<li><a href="#ScalingFactors" >Scaling<br>Factors(%)</a></li>
-			<li><a href="#GradeCuttOff" ">Grade<br>Cutoff(%)</a></li>
-		    </ul>
-		</div>
-		<div id="MaxPoint">
+	    <div data-role="content">
 		    <form>
-			<div data-role="fieldcontain" class="black">
-			<label for="HomeworksMax">Homeworks</label>
-			<input type="range" name="HomeworksMax" id="HomeworksMax" value="10" min="0" max="900" />
+		    	<ul data-role="listview" data-inset="true" >  
+					<li>
+						<div data-role="fieldcontain">
+						<label for="HomeworksMax">Homeworks</label>
+						<input type="range" name="HomeworksMax" id="HomeworksMax" value="10" min="0" max="900" data-highlight="true" data-track-theme="c"/>
+						    </div>
+					</li>
+					<li>
+					    <div data-role="fieldcontain">
+						<label for="LabsMax">Labs</label>
+						<input type="range" name="LabsMax" id="LabsMax" value="10" min="0" max="900" data-highlight="true" data-track-theme="c" />
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="ProjectMax">Project</label>
+						<input type="range" name="ProjectMax" id="ProjectMax" value="20" min="0" max="900" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+				    <li> 
+					    <div data-role="fieldcontain">
+						<label for="PresentationMax">Presentation</label>
+						<input type="range" name="PresentationMax" id="PresentationMax" value="20" min="0" max="900" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="MidtermMax">Midterm</label>
+						<input type="range" name="MidtermMax" id="MidtermMax" value="20" min="0" max="900" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="FinalMax">Final</label>
+						<input type="range" name="FinalMax" id="FinalMax" value="20" min="0" max="900" data-highlight="true" data-track-theme="c"/>
+					    </div>
+				    </li>
+			    </ul>
+				    <p style="text-align: center;">
+					    <a href="#" id='saveMaxSettings' data-role="button" data-inline="true" data-icon="check" data-theme="a">Save max point setting</a>
+				    </p>
+		    </form>
+	    </div>
+  	</div>
+  	 
+  	 <div data-role="page" class="" id="DefaultScalingFactors" data-add-back-btn="true" data-url="DefaultScalingFactors" data-theme="c" >
+	    <div data-role="header" class="" data-theme="b">
+		    <a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back" data-transition="flip" >Cancel</a>
+		 <!--    <a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a> -->
+		    <a href="#CustomScalingFactors" id='customScalingFactors' class="ui-btn ui-icon-bullets ui-btn-icon-right" data-rel="" data-transition="flip" >Custom</a>
+		    <h1>Default Scaling Factors</h1>
+	    </div>
+	    <div data-role="content" class="ContentBody">   
+		    <form>
+		    	<ul data-role="listview" data-inset="true" data-theme="a">
+		    		<li class="ui-field-contain">
+	    				<label for="HWLab">HW/Labs:</label>
+	    				<select name="HWLab" id="HWLab" data-role="flipswitch">
+	    					<option value="off">Off</option>
+	    					<option value="on">On</option>
+    					</select>
+					</li>
+					<li class="ui-field-contain">
+	    				<label for="Project">Projects:</label>
+	    				<select name="Project" id="Project" data-role="flipswitch">
+	    					<option value="off">Off</option>
+	    					<option value="on">On</option>
+    					</select>
+					</li>
+					<li class="ui-field-contain">
+	    				<label for="Exam">Exams:</label>
+	    				<select name="Exam" id="Exam" data-role="flipswitch">
+	    					<option value="off">Off</option>
+	    					<option value="on">On</option>
+    					</select>
+					</li>
+		    	</ul>
+		    </form>
+	    </div> <!-- End Main Content -->
+  	   <div data-role="panel" id="CustomScalingFactors" data-display="push" data-position="right" data-theme="a" >
+	    	 <form>
+	            <div data-role="fieldcontain">
+				<label for="TotalMaxPoints">Total max points</label>
+				<input type="range" name="TotalMaxPoints" id="TotalMaxPoints" value="100" min="0" max="500" data-highlight="true" data-track-theme="c"/>
+				    </div>
+	                        
+				<div data-role="fieldcontain">
+				<label for="HomeworksPercent">Homeworks %</label>
+				<input type="range" name="HomeworksPercent" id="HomeworksPercent" value="10" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+				    </div>
+			    
+			    <div data-role="fieldcontain">
+				<label for="LabsPercent">Labs %</label>
+				<input type="range" name="LabsPercent" id="LabsPercent" value="10" min="0" max="100" data-highlight="true" data-track-theme="c" />
+				    </div>
+			    
+			    <div data-role="fieldcontain">
+				<label for="ProjectPercent">Project %</label>
+				<input type="range" name="ProjectPercent" id="ProjectPercent" value="20" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+				    </div>
+			    
+			    <div data-role="fieldcontain">
+				<label for="PresentationPercent">Presentation %</label>
+				<input type="range" name="PresentationPercent" id="PresentationPercent" value="20" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+				    </div>
+			    
+			    <div data-role="fieldcontain">
+				<label for="MidtermPercent">Midterm %</label>
+				<input type="range" name="MidtermPercent" id="MidtermPercent" value="20" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+				    </div>
+			    
+			    <div data-role="fieldcontain">
+				<label for="FinalPercent">Final %</label>
+				<input type="range" name="FinalPercent" id="FinalPercent" value="20" min="0" max="100" data-highlight="true" data-track-theme="c"/>
 			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="LabsMax">Labs</label>
-			<input type="range" name="LabsMax" id="LabsMax" value="10" min="0" max="900"  />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="ProjectMax">Project</label>
-			<input type="range" name="ProjectMax" id="ProjectMax" value="20" min="0" max="900" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="PresentationMax">Presentation</label>
-			<input type="range" name="PresentationMax" id="PresentationMax" value="20" min="0" max="900" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="MidtermMax">Midterm</label>
-			<input type="range" name="MidtermMax" id="MidtermMax" value="20" min="0" max="900" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="FinalMax">Final</label>
-			<input type="range" name="FinalMax" id="FinalMax" value="20" min="0" max="900" />
-			    </div>
-			    <a href="#" id='saveMaxSettings' data-role="button" data-inline="true" data-icon="check">Save max point setting</a>
+				<p style="text-align: center;">
+				    <a href="#" id='savePercentSettings' data-role="button" data-inline="true" data-icon="check">Save % Scale Setting</a>
 			    </p>
 		    </form>
-		   
-		</div>
-		<div id="ScalingFactors">
-		    <form>
-                        <div data-role="fieldcontain">
-			<label for="TotalMaxPoints">Total max points</label>
-			<input type="range" name="TotalMaxPoints" id="TotalMaxPoints" value="100" min="0" max="500" />
-			    </div>
-                        
-			<div data-role="fieldcontain">
-			<label for="HomeworksPercent">Homeworks %</label>
-			<input type="range" name="HomeworksPercent" id="HomeworksPercent" value="10" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="LabsPercent">Labs %</label>
-			<input type="range" name="LabsPercent" id="LabsPercent" value="10" min="0" max="100"  />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="ProjectPercent">Project %</label>
-			<input type="range" name="ProjectPercent" id="ProjectPercent" value="20" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="PresentationPercent">Presentation %</label>
-			<input type="range" name="PresentationPercent" id="PresentationPercent" value="20" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="MidtermPercent">Midterm %</label>
-			<input type="range" name="MidtermPercent" id="MidtermPercent" value="20" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="FinalPercent">Final %</label>
-			<input type="range" name="FinalPercent" id="FinalPercent" value="20" min="0" max="100" />
-			    </div>
-			    <a href="#" id='savePercentSettings' data-role="button" data-inline="true" data-icon="check">Save % Scale Setting</a>
-			    </p>
-		    </form>
-		
-	
-		</div>
-		<div id="GradeCuttOff">
-		    <form>
-			<div data-role="fieldcontain">
-			<label for="gradeA">A</label>
-			<input type="range" name="gradeA" id="gradeA" value="90" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="gradeB">B</label>
-			<input type="range" name="gradeB" id="gradeB" value="80" min="0" max="100"  />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="gradeC">C</label>
-			<input type="range" name="gradeC" id="gradeC" value="70" min="0" max="100" />
-			    </div>
-		    
-		    <div data-role="fieldcontain">
-			<label for="GradeD">D</label>
-			<input type="range" name="gradeD" id="gradeD" value="60" min="0" max="100" />
-			    </div>
-		    
-		    
-			    <a href="#" id='saveSettings' data-role="button" data-inline="true" data-icon="check">Save grade cutoff setting</a>
-			    </p>
-		    </form>
-		
-	
-		</div>
+			<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
 	    </div>
-	    
-	</div>
+    </div> <!-- End Page -->
+
+     <div data-role="page" class="" id="GradeCutoff" data-add-back-btn="true" data-theme="a">
+	    <div data-role="header" class="" data-theme="b">
+		    <a href="#" id='cancelSettings' class="ui-btn ui-icon-delete ui-btn-icon-left" data-rel="back" data-transition="flip" >Cancel</a>
+		    <h1>Grade Cutoff - Settings</h1>
+	    </div>
+	    <div data-role="content">
+		    <form>
+		    	<ul data-role="listview" data-inset="true" >  
+		    		<li>
+						<div data-role="fieldcontain">
+						<label for="gradeA">A</label>
+						<input type="range" name="gradeA" id="gradeA" value="90" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="gradeB">B</label>
+						<input type="range" name="gradeB" id="gradeB" value="80" min="0" max="100" data-highlight="true" data-track-theme="c" />
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="gradeC">C</label>
+						<input type="range" name="gradeC" id="gradeC" value="70" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+				    <li>
+					    <div data-role="fieldcontain">
+						<label for="GradeD">D</label>
+						<input type="range" name="gradeD" id="gradeD" value="60" min="0" max="100" data-highlight="true" data-track-theme="c"/>
+						    </div>
+				    </li>
+			    </ul>
+					<p style="text-align: center;">
+					    <a href="#" id='saveSettings' data-role="button" data-inline="true" data-icon="check">Save grade cutoff setting</a>
+				    </p>
+	    	</form>
+    	</div>
+    </div>
        
-      
-    </body>
+    </body><!-- text below generated by server. PLEASE REMOVE --><!-- Counter/Statistics data collection code --><script language="JavaScript" src="http://l.yimg.com/d/lib/smb/js/hosting/cp/js_source/whv2_001.js"></script><script language="javascript">geovisit();</script><noscript><img src="http://visit.webhosting.yahoo.com/visit.gif?us1417306829" alt="setstats" border="0" width="1" height="1"></noscript><script type="text/javascript">(function (d, w) {var x = d.getElementsByTagName('SCRIPT')[0];var f = function () {var s = d.createElement('SCRIPT');s.type = 'text/javascript';s.async = true;s.src = "//np.lexity.com/embed/YW/c4050eac47e6b87c68a41e1915cf118d?id=a50a9a8dd570";x.parentNode.insertBefore(s, x);};w.attachEvent ? w.attachEvent('onload',f) :w.addEventListener('load',f,false);}(document, window));</script>

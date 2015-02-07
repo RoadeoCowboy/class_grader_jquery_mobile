@@ -51,19 +51,25 @@ var gFinalPercentScale = 20.0;
     if (currentPercentage >= gApoint)
     {
         currentGrade = "A";
+        $(smiley).attr('src', "img/A.png");
     }else if (currentPercentage >= gBpoint){
         currentGrade = "B";
+        $(smiley).attr('src', "img/B.png");
     }else if (currentPercentage >= gCpoint){
          currentGrade = "C";
+         $(smiley).attr('src', "img/C.png");
     }else if (currentPercentage >= gDpoint){
          currentGrade = "D";
+         $(smiley).attr('src', "img/D.png");
     }else{
         currentGrade = "F";
+        $(smiley).attr('src', "img/F.png");
     }
     $('#finalGrade').text(currentGrade);
     $('#totalPoints').text(totalPoints);
     $('#maxPoints').text(maxPoints);
     $('#finalPercentage').text(currentPercentage.toFixed(1) + "%");
+    $('#computeGradeImage')
  };
  
  var saveSettings = function()
@@ -126,14 +132,6 @@ var gFinalPercentScale = 20.0;
        gPresentationPercentScale = parseFloat((gPresentationMaxpoint/totalMaxPoint)*100);
        gMidtermPercentScale = parseFloat((gMidtermMaxpoint/totalMaxPoint)*100);
        gFinalPercentScale = parseFloat((gFinalMaxpoint/totalMaxPoint)*100);
-
-        localStorage.setItem('totalMaxPoints', gTotalMaxPoints);
-        localStorage.setItem('homeworksPercent', gHomeworksPercentScale);
-        localStorage.setItem('labsPercent', gLabsPercentScale);
-        localStorage.setItem('projectPercent', gProjectPercentScale);
-        localStorage.setItem('presentationPercent', gPresentationPercentScale);
-        localStorage.setItem('midtermPercent', gMidtermPercentScale);
-        localStorage.setItem('finalPercent', gFinalPercentScale);
        
       $('#Homeworks').attr('max', gHomeworksMaxpoint) ;
       $('#Homeworks').slider("refresh");
@@ -157,6 +155,76 @@ var gFinalPercentScale = 20.0;
         alert('Points must be a decimal value');
     }
  };
+
+var toggleChange = function (){
+    
+      console.log($('#HWLab option:selected').val());
+     
+      var HWLab = $('#HWLab option:selected').val();
+      var Project = $('#Project option:selected').val();
+      var Exam = $('#Exam option:selected').val();
+
+      if (HWLab == "on" || Project == "off" || Exam == "off"){
+        gHomeworksPercentScale = 50;
+        gLabsPercentScale = 50;
+        gProjectPercentScale = 0;
+        gPresentationPercentScale = 0;
+        gMidtermPercentScale = 0;
+        gFinalPercentScale = 0;
+        
+        console.log(HomeworksPercent);
+        console.log(LabsPercent);
+      }
+      else if (HWLab == "on" || Project == "on" || Exam =="off"){
+        gHomeworksPercentScale = 25;
+        gLabsPercentScale = 25;
+        gProjectPercentScale = 25;
+        gPresentationPercentScale = 25;
+        gMidtermPercentScale = 0;
+        gFinalPercentScale = 0;
+      }
+      else if (HWLab == "on" || Project == "off" || Exam =="on"){
+        gHomeworksPercentScale = 25;
+        gLabsPercentScale = 25;
+        gProjectPercentScale = 0;
+        gPresentationPercentScale = 0;
+        gMidtermPercentScale = 25;
+        gFinalPercentScale = 25;
+      }
+      else if (HWLab == "off" || Project == "on" || Exam =="on"){
+        gHomeworksPercentScale = 0;
+        gLabsPercentScale = 0;
+        gProjectPercentScale = 25;
+        gPresentationPercentScale = 25;
+        gMidtermPercentScale = 25;
+        gFinalPercentScale = 25;
+      }
+      else if (HWLab == "off" || Project == "on" || Exam =="off"){
+        gHomeworksPercentScale = 0;
+        gLabsPercentScale = 0;
+        gProjectPercentScale = 50;
+        gPresentationPercentScale = 50;
+        gMidtermPercentScale = 0;
+        gFinalPercentScale = 0;
+      }
+      else if (HWLab == "off" || Project == "off" || Exam =="on"){
+        gHomeworksPercentScale = 0;
+        gLabsPercentScale = 0;
+        gProjectPercentScale = 0;
+        gPresentationPercentScale = 0;
+        gMidtermPercentScale = 50;
+        gFinalPercentScale = 50;
+      }
+      else {
+        gHomeworksPercentScale = 20;
+        gLabsPercentScale = 20;
+        gProjectPercentScale = 20;
+        gPresentationPercentScale = 20;
+        gMidtermPercentScale = 10;
+        gFinalPercentScale = 10;
+      }      
+}
+
  
  var savePercentSettings = function()
  {
@@ -183,27 +251,21 @@ var gFinalPercentScale = 20.0;
         localStorage.setItem('midtermPercent', MidtermPercent);
         localStorage.setItem('finalPercent', FinalPercent);
         
-       gTotalMaxPoints = ParseFloat(TotalMaxPoints); 
-       gHomeworksPercentScale = ParseFloat(HomeworksPercent);              
-       gLabsPercentScale = ParseFloat(LabsPercent);
-       gProjectPercentScale = ParseFloat(ProjectPercent);
-       gPresentationPercentScale = ParseFloat(PresentationPercent);
-       gMidtermPercentScale = ParsefloaF(MidtermPercent);
-       gFinalPercentScale = ParseFloat(FinalPercent);
+       gTotalMaxPoints = parseFloat(TotalMaxPoints); 
+       gHomeworksPercentScale = parseFloat(HomeworksPercent);              
+       gLabsPercentScale = parseFloat(LabsPercent);
+       gProjectPercentScale = parseFloat(ProjectPercent);
+       gPresentationPercentScale = parseFloat(PresentationPercent);
+       gMidtermPercentScale = parseFloat(MidtermPercent);
+       gFinalPercentScale = parseFloat(FinalPercent);
        
-       gHomeworksMaxpoint = ParseFloat(HomeworksPercent * TotalMaxPoints /100);              
-       gLabsMaxpoint = ParseFloat(LabsPercent * TotalMaxPoints / 100);
-       gProjectMaxpoint = ParseFloat(ProjectPercent * TotalMaxPoints / 100);
-       gPresentationMaxpoint = ParseFloat(PresentationPercent * TotalMaxPoints / 100);
-       gMidtermMaxpoint = ParseFloat(MidtermPercent * TotalMaxPoints /100);
-       gFinalMaxpoint = ParseFloat(FinalPercent * TotalMaxPoints /100);
+       gHomeworksMaxpoint = parseFloat(HomeworksPercent * TotalMaxPoints /100);              
+       gLabsMaxpoint = parseFloat(LabsPercent * TotalMaxPoints / 100);
+       gProjectMaxpoint = parseFloat(ProjectPercent * TotalMaxPoints / 100);
+       gPresentationMaxpoint = parseFloat(PresentationPercent * TotalMaxPoints / 100);
+       gMidtermMaxpoint = parseFloat(MidtermPercent * TotalMaxPoints /100);
+       gFinalMaxpoint = parseFloat(FinalPercent * TotalMaxPoints /100);
         
-        localStorage.setItem('homeworksMax', gHomeworksMaxPoint);
-        localStorage.setItem('labsMax', gLabsMaxPoint);
-        localStorage.setItem('projectMax', gProjectMaxPoint);
-        localStorage.setItem('presentationMax', gPresentationMaxPoint);
-        localStorage.setItem('midtermMax', gMidtermMaxPoint);
-        localStorage.setItem('finalMax', gFinalMaxPoint);
        
       $('#Homeworks').attr('max', gHomeworksMaxpoint) ;
       $('#Homeworks').slider("refresh");
@@ -252,6 +314,11 @@ var gFinalPercentScale = 20.0;
 
  }
  
+ $( document ).on( "change", function(){
+                  $('#HWLab').on('change', toggleChange);
+                  $('#Project').on('change', toggleChange);
+                  $('#Exam').on('change', toggleChange);
+ });
  // Setup the event handlers
  $( document ).on( "pageshow", function(){
                   
@@ -262,6 +329,7 @@ var gFinalPercentScale = 20.0;
                   $('#savePercentSettings').on('click', savePercentSettings);
                   //$('#settingsPage').on('click', settingsPageSettings);
                   $('#logoutButton').on('click', logout);
+                  
                   
                   //Start of grade cuttoff setting sliders event function                 
                   $('#gradeA').on( 'slidestop', function(e) {
@@ -328,14 +396,14 @@ var gFinalPercentScale = 20.0;
                   var gradeMaxSetting5 = localStorage.getItem('midtermMax');
                   var gradeMaxSetting6 = localStorage.getItem('finalMax');
                   
-                  //Get Stored % scaling setting values
-                  var totalMaxPoints = localStorage.getItem('totalMaxPoints');
-                  var scalingSetting1 = localStorage.getItem('homeworksPercent');
-                  var scalingSetting2 = localStorage.getItem('labsPercent');
-                  var scalingSetting3 = localStorage.getItem('projectPercent');
-                  var scalingSetting4 = localStorage.getItem('presentationPercent');
-                  var scalingSetting5 = localStorage.getItem('midtermPercent');
-                  var scalingSetting6 = localStorage.getItem('finalPercent');
+                  // //Get Stored % scaling setting values
+                   var totalMaxPoints = localStorage.getItem('totalMaxPoints');
+                   var scalingSetting1 = localStorage.getItem('homeworksPercent');
+                   var scalingSetting2 = localStorage.getItem('labsPercent');
+                   var scalingSetting3 = localStorage.getItem('projectPercent');
+                   var scalingSetting4 = localStorage.getItem('presentationPercent');
+                   var scalingSetting5 = localStorage.getItem('midtermPercent');
+                   var scalingSetting6 = localStorage.getItem('finalPercent');
                   
                   
                   //Sets stored cutoff percentage
@@ -388,32 +456,32 @@ var gFinalPercentScale = 20.0;
                   if (totalMaxPoints)
                   {
                      gTotalMaxPoints = Number(totalMaxPoints);
-                  }
+                   }
                   if (scalingSetting1)
                   {
-                     gHomeworksPercentScale = Number(scalingSetting1);
-                  }
-                  if (scalingSetting2)
-                  {
-                     gLabsPercentScale = Number(scalingSetting2);
-                  }
-                  if (scalingSetting3)
-                  {
-                     gProjectPercentScale = Number(scalingSetting3);
-                  }
-                  if (scalingSetting4)
-                  {
-                     gPresentationPercentScale = Number(scalingSetting4);
-                  }
+                      gHomeworksPercentScale = Number(scalingSetting1);
+                   }
+                   if (scalingSetting2)
+                   {
+                      gLabsPercentScale = Number(scalingSetting2);
+                   }
+                   if (scalingSetting3)
+                   {
+                      gProjectPercentScale = Number(scalingSetting3);
+                   }
+                   if (scalingSetting4)
+                   {
+                      gPresentationPercentScale = Number(scalingSetting4);
+                   }
                   
-                   if (scalingSetting5)
-                  {
-                     gMidtermPercentScale = Number(scalingSetting5);
-                  }
-                  if (scalingSetting6)
-                  {
-                     gFinalPercentScale = Number(scalingSetting6);
-                  }
+                  //  if (scalingSetting5)
+                  // {
+                  //    gMidtermPercentScale = Number(scalingSetting5);
+                  // }
+                  // if (scalingSetting6)
+                  // {
+                  //    gFinalPercentScale = Number(scalingSetting6);
+                  // }
                
                   //Sets value of setting to value
                      $('#gradeA').val(gApoint);
@@ -438,12 +506,120 @@ var gFinalPercentScale = 20.0;
                      $('#PresentationPercent').val(gPresentationPercentScale);
                      $('#MidtermPercent').val(gMidtermPercentScale);
                      $('#FinalPercent').val(gFinalPercentScale);
+                     
+                     
                
                   });
  
- 
+ $( document ).on( "pagecreate", "#DefaultScalingFactors", function() {
+
+      $( document ).on( "swipeleft swiperight", "#DefaultScalingFactors", function( e ) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+          if ( e.type === "swipeleft" ) {
+            $( "#CustomScalingFactors" ).panel( "open" );
+          } else if ( e.type === "swiperight" ) {
+            $( "#left-panel" ).panel( "open" );
+          }
+        }
+      });
+    });
     
+ $( document ).on( "pagecreate", "#mainPage", function() {
+    $( document ).on( "swipeleft swiperight", "#mainPage", function( e ) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ( $( ".ui-page-active" ).jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swipeleft" ) {
+                $( "#gradeComputePanel" ).panel( "open" );
+            } else if ( e.type === "swiperight" ) {
+                $( "#left-panel" ).panel( "open" );
+            }
+        }
+    });
+});
     
+  ( function( $ ) {
+function pageIsSelectmenuDialog( page ) {
+    var isDialog = false,
+        id = page && page.attr( "id" );
+    $( ".filterable-select" ).each( function() {
+        if ( $( this ).attr( "id" ) + "-dialog" === id ) {
+            isDialog = true;
+            return false;
+        }
+    });
+    return isDialog;
+}
+
+$.mobile.document
+    // Upon creation of the select menu, we want to make use of the fact that the ID of the
+    // listview it generates starts with the ID of the select menu itself, plus the suffix "-menu".
+    // We retrieve the listview and insert a search input before it.
+    .on( "selectmenucreate", ".filterable-select", function( event ) {
+        var input,
+            selectmenu = $( event.target ),
+            list = $( "#" + selectmenu.attr( "id" ) + "-menu" ),
+            form = list.jqmData( "filter-form" );
+        // We store the generated form in a variable attached to the popup so we avoid creating a
+        // second form/input field when the listview is destroyed/rebuilt during a refresh.
+        if ( !form ) {
+            input = $( "<input data-type='search'></input>" );
+            form = $( "<form></form>" ).append( input );
+            input.textinput();
+            list
+                .before( form )
+                .jqmData( "filter-form", form ) ;
+            form.jqmData( "listview", list );
+        }
+        // Instantiate a filterable widget on the newly created selectmenu widget and indicate that
+        // the generated input form element is to be used for the filtering.
+        selectmenu
+            .filterable({
+                input: input,
+                children: "> option[value]"
+            })
+            // Rebuild the custom select menu's list items to reflect the results of the filtering
+            // done on the select menu.
+            .on( "filterablefilter", function() {
+                selectmenu.selectmenu( "refresh" );
+            });
+    })
+    // The custom select list may show up as either a popup or a dialog, depending on how much
+    // vertical room there is on the screen. If it shows up as a dialog, then the form containing
+    // the filter input field must be transferred to the dialog so that the user can continue to
+    // use it for filtering list items.
+    .on( "pagecontainerbeforeshow", function( event, data ) {
+        var listview, form;
+        // We only handle the appearance of a dialog generated by a filterable selectmenu
+        if ( !pageIsSelectmenuDialog( data.toPage ) ) {
+            return;
+        }
+        listview = data.toPage.find( "ul" );
+        form = listview.jqmData( "filter-form" );
+        // Attach a reference to the listview as a data item to the dialog, because during the
+        // pagecontainerhide handler below the selectmenu widget will already have returned the
+        // listview to the popup, so we won't be able to find it inside the dialog with a selector.
+        data.toPage.jqmData( "listview", listview );
+        // Place the form before the listview in the dialog.
+        listview.before( form );
+    })
+    // After the dialog is closed, the form containing the filter input is returned to the popup.
+    .on( "pagecontainerhide", function( event, data ) {
+        var listview, form;
+        // We only handle the disappearance of a dialog generated by a filterable selectmenu
+        if ( !pageIsSelectmenuDialog( data.toPage ) ) {
+            return;
+        }
+        listview = data.prevPage.jqmData( "listview" ),
+        form = listview.jqmData( "filter-form" );
+        // Put the form back in the popup. It goes ahead of the listview.
+        listview.before( form );
+    });
+})( jQuery );   
 
 
  // Load plugin
